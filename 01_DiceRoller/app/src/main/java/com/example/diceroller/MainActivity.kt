@@ -9,14 +9,16 @@ import android.widget.Toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    lateinit var diceImage: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        diceImage = findViewById(R.id.dice_image)
         findViewById<Button>(R.id.roll_button).run { setOnClickListener {rollDice()} }
     }
 
     private fun rollDice() {
-        findViewById<ImageView>(R.id.dice_image).run {
+        diceImage.run {
             setImageResource(
                 when (Random().nextInt(6) + 1) {
                     1 -> R.drawable.dice_1
