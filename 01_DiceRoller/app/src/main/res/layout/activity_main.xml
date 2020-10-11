@@ -7,13 +7,13 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:layout_gravity="center_vertical">
-    <TextView
+
+    <ImageView
+        android:id="@+id/dice_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="30sp"
-        android:text="1"
-        android:id="@+id/roll_result_text"/>
+        android:src="@drawable/empty_dice" />
 
     <Button
         android:layout_width="wrap_content"
