@@ -8,28 +8,34 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.example.aboutme.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private val myName = MyName("Prokop Černý")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.done_button).setOnClickListener {
-            addNickname(it)
-        }
+        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+            .apply {
+                doneButton.setOnClickListener { addNickname(it) }
+                myName = this@MainActivity.myName
+            }
     }
 
     private fun addNickname(view: View) {
-        val nickname = findViewById<EditText>(R.id.nickname_edit).apply {
-            visibility = View.GONE
-        }.text.toString()
 
-        with(findViewById<TextView>(R.id.nickname_text)) {
-            text = nickname
-            visibility = View.VISIBLE
+        with(binding) {
+            myName?.nickname = nicknameEdit.text.toString()
+            invalidateAll()
+            nicknameText.visibility = View.VISIBLE
+            nicknameEdit.visibility = View.GONE
+            doneButton.visibility = View.GONE
         }
 
-        view.visibility = View.GONE
-
+        // Hide keyboard
         with(getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager) {
             hideSoftInputFromWindow(view.windowToken, 0)
         }
