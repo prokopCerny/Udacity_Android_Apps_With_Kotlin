@@ -2,4 +2,7 @@
     <string name="app_name">About Me</string>
     <string name="name">Prokop Černý</string>
     <string name="yellow_star">Yellow star</string>
+    <string name="bio">My name is Prokop, and I like VR. \n\n
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum feugiat volutpat lectus, malesuada egestas libero. Integer scelerisque lectus massa, ac maximus mi dictum sit amet. Cras egestas accumsan libero, a ornare metus convallis id. Quisque posuere neque in pellentesque tincidunt. Donec luctus ex justo, sed convallis mi consequat vel. Vestibulum a dignissim nibh. Curabitur at mattis nulla. Fusce et ullamcorper lorem, in lobortis magna. Aenean a ipsum fringilla lectus gravida varius nec et dui. Phasellus dignissim sapien elit, vel pellentesque neque rutrum id.
+        \n\n Praesent cursus interdum magna sed dapibus. Nulla bibendum ipsum id mauris convallis pellentesque et eu tellus. Aenean erat diam, venenatis sed sodales ut, commodo non justo. Vestibulum vel placerat ipsum. In nec mi eget orci porttitor porta id quis tellus. Curabitur rhoncus porttitor lacus in vulputate. Pellentesque mattis pellentesque porttitor. Donec efficitur efficitur nunc. Suspendisse non consectetur enim. Sed eleifend mi id aliquet dapibus. </string>
 </resources>
