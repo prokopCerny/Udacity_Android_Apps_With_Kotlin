@@ -34,6 +34,11 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
     private var revenue = 0
     private var dessertsSold = 0
 
+    private val KEY_REVENUE = "key_revenue"
+    private val KEY_DESSERTS_SOLD = "key_desserts_sold"
+    private val KEY_SECONDS = "key_seconds"
+
+
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
     private lateinit var dessertTimer: DessertTimer
@@ -105,14 +110,35 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
             onDessertClicked()
         }
 
+
+        dessertTimer = DessertTimer(this.lifecycle)
+
+        savedInstanceState?.let {
+            revenue = it.getInt(KEY_REVENUE, 0)
+            dessertsSold = it.getInt(KEY_DESSERTS_SOLD, 0)
+            dessertTimer.secondsCount = it.getInt(KEY_SECONDS, 0)
+            showCurrentDessert()
+        }
+
         // Set the TextViews to the right values
         binding.revenue = revenue
         binding.amountSold = dessertsSold
 
         // Make sure the correct dessert is showing
         binding.dessertButton.setImageResource(currentDessert.imageId)
+    }
 
-        dessertTimer = DessertTimer(this.lifecycle)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Timber.i("onSaveInstanceState called")
+        outState.putInt(KEY_REVENUE, revenue)
+        outState.putInt(KEY_DESSERTS_SOLD, dessertsSold)
+        outState.putInt(KEY_SECONDS, dessertTimer.secondsCount)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        Timber.i("onRestoreInstanceState called")
     }
 
     /**
