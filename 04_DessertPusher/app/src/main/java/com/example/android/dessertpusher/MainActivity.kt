@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
+    private lateinit var dessertTimer: DessertTimer
 
     /** Dessert Data **/
 
@@ -74,24 +75,26 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         Timber.i("onPause called")
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.i("onDestroy called")
-    }
-
     override fun onRestart() {
         super.onRestart()
         Timber.i("onRestart called")
     }
 
-    override fun onStop() {
-        super.onStop()
-        Timber.i("onStop called")
-    }
-
     override fun onStart() {
         super.onStart()
         Timber.i("onStart called")
+        dessertTimer.startTimer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.i("onStop called")
+        dessertTimer.stopTimer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.i("onDestroy called")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +113,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
         // Make sure the correct dessert is showing
         binding.dessertButton.setImageResource(currentDessert.imageId)
+
+        dessertTimer = DessertTimer()
     }
 
     /**
