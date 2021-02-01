@@ -52,6 +52,9 @@ dependencies {
     // Support libraries
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
 
+    //Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
     // Android KTX
     implementation "androidx.core:core-ktx:$version_core"
 
