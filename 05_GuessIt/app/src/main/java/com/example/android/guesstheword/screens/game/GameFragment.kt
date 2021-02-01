@@ -54,16 +54,14 @@ class GameFragment : Fragment() {
         Timber.i("GameFragment created")
 
         binding.gameViewModel = viewModel
+        binding.lifecycleOwner = this
 
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore -> binding.scoreText.text = newScore.toString() })
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord -> binding.wordText.text = newWord })
         viewModel.eventGameFinished.observe(viewLifecycleOwner, Observer { hasFinished ->
             if (hasFinished) {
                 gameFinished()
                 viewModel.onGameFinishComplete()
             }
         })
-        viewModel.currentTime.observe(viewLifecycleOwner, Observer { newTime -> binding.timerText.text = DateUtils.formatElapsedTime(newTime) })
         return binding.root
 
     }
