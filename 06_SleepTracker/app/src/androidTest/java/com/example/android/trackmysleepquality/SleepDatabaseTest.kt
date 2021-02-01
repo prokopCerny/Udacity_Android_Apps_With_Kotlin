@@ -67,5 +67,24 @@ class SleepDatabaseTest {
         val tonight = sleepDao.getTonight()
         assertEquals(tonight?.sleepQuality, -1)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertAndGetAllNights() {
+        //WILL FAIL
+        val night1 = SleepNight()
+        val night2 = SleepNight(sleepQuality = 1)
+        with (sleepDao) {
+            insert(night1)
+            assertEquals(-1, getTonight()?.sleepQuality)
+            insert(night2)
+            assertEquals(1, getTonight()?.sleepQuality)
+        }
+
+        // getAllNights returns LiveData, which query asynchronously, the value will most likely be null
+        val nights = sleepDao.getAllNights()
+        val curSize = nights.value!!.size
+        assertEquals(2, curSize)
+    }
 }
 
