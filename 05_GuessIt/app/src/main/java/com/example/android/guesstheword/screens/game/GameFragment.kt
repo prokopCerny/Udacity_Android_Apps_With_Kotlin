@@ -53,14 +53,7 @@ class GameFragment : Fragment() {
 //        viewModel = ViewModelProvider(this).get(GameViewModel::class.java) // when using private lateinit var viewModel: GameViewModel
         Timber.i("GameFragment created")
 
-
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        binding.gameViewModel = viewModel
 
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore -> binding.scoreText.text = newScore.toString() })
         viewModel.word.observe(viewLifecycleOwner, Observer { newWord -> binding.wordText.text = newWord })
