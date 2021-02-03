@@ -7,6 +7,7 @@ import com.example.android.gdgfinder.network.GdgChapter
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.io.IOException
 
 
@@ -55,6 +56,8 @@ class GdgListViewModel: ViewModel() {
                     }
                 }
             } catch (e: IOException) {
+                _gdgList.value = listOf()
+            } catch (e: HttpException) {
                 _gdgList.value = listOf()
             }
         }

@@ -1,6 +1,7 @@
 package com.example.android.gdgfinder.search
 
 import android.location.Location
+import android.util.Log
 import com.example.android.gdgfinder.network.GdgApiService
 import com.example.android.gdgfinder.network.GdgChapter
 import com.example.android.gdgfinder.network.GdgResponse
@@ -10,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class GdgChapterRepository(gdgApiService: GdgApiService) {
 
@@ -120,8 +122,12 @@ class GdgChapterRepository(gdgApiService: GdgApiService) {
 
             // cancel any in progress sorts, their result is not valid anymore.
             inProgressSort?.cancel()
+            try {
+                doSortData(location)
+            } catch (e: HttpException) {
+                Log.e("GdgChapterRepository", "HttpException", e)
 
-            doSortData(location)
+            }
         }
     }
 
