@@ -28,6 +28,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.io.IOException
 
 /**
@@ -57,7 +58,13 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
 
     init {
         viewModelScope.launch {
-            videosRepository.refreshVideos()
+            try {
+                videosRepository.refreshVideos()
+            } catch (e: HttpException) {
+
+            } catch (e: IOException) {
+                // if started with no internet
+            }
         }
     }
 
